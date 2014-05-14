@@ -1,0 +1,32 @@
+h2= t("common.title.#{action_name}")
+
+= form_for @account do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :name, Account.human_attribute_name("name")
+      = f.text_field :name, :size => 40
+    - if @account.new_record?
+      p
+        = f.label :password, Account.human_attribute_name("password")
+        = f.password_field :password, :size => 40
+      p
+        = f.label :password_confirmation, Account.human_attribute_name("password_confirmation")
+        = f.password_field :password_confirmation, :size => 40
+    p
+      = f.label :daum_account, Account.human_attribute_name("daum_account")
+      = f.email_field :daum_account, :size => 40, placeholder: t('accounts.add.request')
+    p
+      = f.label :nate_account, Account.human_attribute_name("nate_account")
+      = f.email_field :nate_account, :size => 40
+    p
+      = f.label :notify_email, Account.human_attribute_name("notify_email")
+      = f.email_field :notify_email, :size => 40
+    p
+      = f.label :boxcar_account, Account.human_attribute_name("boxcar_account")
+      = f.email_field :boxcar_account, :size => 40
+    p
+      = f.label :locale, Account.human_attribute_name("locale")
+      = f.select :locale, options_for_select([['한글', 'ko'], ['English', 'en']], @account.locale)
+  p
+    = f.submit t("common.button.create")

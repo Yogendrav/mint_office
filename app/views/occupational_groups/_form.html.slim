@@ -1,0 +1,6 @@
+= form_for occupational_group do |f|
+  =f.error_messages
+  .field
+    = f.label :name
+    = f.text_field :name
+  .actions = f.submit 'Save'

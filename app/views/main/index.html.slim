@@ -1,0 +1,27 @@
+#logo
+  = image_tag 'mint_logo.png'
+
+div.hidden-phone
+  = calendar @events do |event|
+    - if event.class.name == 'Holiday'
+      div.holiday = event.title
+    - else
+      div.vacation
+        - if current_person.admin? or event.used.vacation.employee.person == current_person
+          = link_to event.title, vacation_used_vacation_path(event.used.vacation, event.used)
+        - else
+          = event.title
+
+div.visible-phone
+  ul
+    - @vacations2.each do |used|
+      li= link_to used.title, vacation_used_vacation_path(used.vacation, used)
+
+= render partial: "main_menu3"
+
+javascript:
+  $(document).ready(function () {
+    $( ".holiday" ).each(function() {
+        $(this).parent().parent().addClass("wday-6");
+    });
+  });

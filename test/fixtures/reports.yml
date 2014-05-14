@@ -1,0 +1,77 @@
+admin_expense_report_bank_transfer:
+    id: 1
+    target_id: 1
+    target_type: "ExpenseReport"
+    status: "not_reported"
+
+admin_expense_report_cardbill:
+    id: 2
+    target_id: 2
+    target_type: "ExpenseReport"
+    status: "not_reported"
+    
+document:
+    id: 3
+    target_id: 1
+    target_type: "Document"
+    status: "not_reported"
+
+cardbill:
+    id: 4
+    target_id: 1
+    target_type: "Cardbill"
+    status: "not_reported"
+
+cardbill_process_cardbill_fixture:
+    id: 5
+    target_id: 3
+    target_type: "Cardbill"
+    status: "not_reported"
+
+cardbill_process_expense_report_cardbill:
+    id: 6
+    target_id: 3
+    target_type: "ExpenseReport"
+    status: "not_reported"
+
+user_document:
+    id: 7
+    target_id: 2
+    target_type: "Document"
+    status: "not_reported"
+
+another_company_document:
+    id: 8
+    target_id: 3
+    target_type: "Document"
+    status: "not_reported"
+
+used_vacation:
+    id: 9
+    target_id: 1
+    target_type: "UsedVacation"
+    status: "not_reported"
+
+purchase_taxbill:
+    id: 10
+    target_id: 1
+    target_type: "Taxbill"
+    status: "not_reported"
+
+sale_taxbill:
+    id: 11
+    target_id: 2
+    target_type: "Taxbill"
+    status: "not_reported"
+
+bank_account:
+    id: 12
+    target_id: 1
+    target_type: "BankAccount"
+    status: "reported"
+
+cardbill_two:
+    id: 13
+    target_id: 2
+    target_type: "Cardbill"
+    status: "reported"

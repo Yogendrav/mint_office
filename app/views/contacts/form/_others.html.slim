@@ -1,0 +1,43 @@
+- 3.times { contact.others.new }
+
+h3
+  = t('contacts_form.other.title')
+= contact_form.fields_for :others do |others_field|
+  .other-form
+    p
+      = others_field.label :target
+      = others_field.select :target, options_for_select(current_company.contact_other_tags.map{|tag| tag.name}, others_field.object.target)
+      - if current_person.present? and current_person.admin?
+        = link_to t('contacts_form.make_new_one'), [:new, :contact_other_tag]
+    p
+      = others_field.label :description
+      = others_field.text_field :description
+= link_to t('contacts_form.other.new'), "", class: 'new-other-form new-form-link'
+
+br
+br
+br
+
+javascript:
+  (function(){
+    $('.other-form').each(function(index){
+      if($(this).find("input[type='text']").val() == "") {
+        $(this).hide();
+      }
+    });
+
+
+    var formLink = $('.new-other-form');
+
+    formLink.click(function(e){
+      e.preventDefault();
+      var form = $('.other-form:hidden');
+
+      form.first().show();
+      if(form.length == 1) {
+        formLink.remove();
+      }
+    });
+
+    formLink.click();
+  }());

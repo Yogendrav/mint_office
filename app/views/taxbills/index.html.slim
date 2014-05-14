@@ -1,0 +1,85 @@
+- title t('.title')
+
+- content_for :search do
+  = form_tag :taxbills, :method => :get do
+    = t("common.title.search")
+    ' :
+    = text_field_tag 'query', params[:query]
+
+    - current = Time.zone.now.year
+    - oldest = Taxbill.oldest_at.year
+
+    - period = { t('taxbills.index.total') => nil}
+    - current.downto(oldest) do |year|
+      - 4.downto(1) do |quarter|
+        - time = Time.zone.parse("#{year}-#{quarter * 3 - 2}-01 00:00:00")
+        - if Taxbill.exists?(transacted_at: time.all_quarter)
+          - period[ "#{year}" + t('taxbills.index.year') + " #{quarter}" + t('taxbills.index.quarter') ] = time
+
+    = select_tag :transacted_at, options_for_select(period, params[:transacted_at]), "onchange" => "this.form.submit()"
+
+    = select_tag :billtype, options_for_select( { t('taxbills.purchase_sales_bill') => "all", t('taxbills.purchase_bill') => Taxbill::BILL_TYPE[0], t('taxbills.sales_bill') =>Taxbill::BILL_TYPE[1]}, params[:billtype]), "onchange" => "this.form.submit()"
+    = select_tag :taxman_id, options_for_select([ ["all" ,"0"] ] + Taxbill.taxmen_list, params[:taxman_id]), "onchange" => "this.form.submit()"
+
+#show_command
+    = link_to t('taxbills.total.link'), [:total, :taxbills]
+    = " "
+    - unless Taxbill.no_taxman_and_client
+      = link_to t('common.title.new'), [:new, :taxbill]
+    - else
+      = link_to t('common.title.new'), "#", class: 'no-taxman-and-client'
+    = " "
+    = link_to t('common.title.excel'), [:excel, :taxbills]
+
+- unless @taxbills.empty?
+    h2
+      = t('taxbills.index.total_eng')
+      ' :
+      = @taxbills.size
+    table#list-table
+      tr
+        th= Taxbill.human_attribute_name('billtype')
+        th= Taxbill.human_attribute_name('transacted_at')
+        th= BusinessClient.human_attribute_name('name')
+        th= BusinessClient.human_attribute_name('owner')
+        th= Taxbill.human_attribute_name('total')
+        th= PaymentRequest.human_attribute_name(:request_status)
+        th= Report.human_attribute_name('status')
+        th.link_button_area
+      - @taxbills.each do |taxbill|
+        tr.selectable.link_to*{"data-url" => taxbill_path(taxbill)}
+          td=h taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill')
+          - if taxbill.transacted_at
+            td=h taxbill.transacted_at.strftime("%Y-%m-%d")
+          - else
+            td
+          - if taxbill.taxman
+            td
+              span
+                =h taxbill.taxman.business_client.name
+            td
+              span
+                =h taxbill.taxman.business_client.owner
+          - else
+              td
+              td
+          td class="numrow"
+            =h number_to_currency taxbill.total
+          td
+            = taxbill.request_status
+          td
+            =h taxbill.localize_status
+          td.link_button_area
+            = link_to t('common.button.detail_veiw'), taxbill, class: 'btn btn-primary'
+    br
+    center
+      = will_paginate @taxbills
+- else
+  h3
+    = t 'taxbills.index.empty'
+
+coffee:
+  $(".no-taxman-and-client").click (event)->
+    event.preventDefault();
+    alert("거래처(Taxman)와 거래처 담당자(BusinessClient)를 먼저 생성해주세요");
+

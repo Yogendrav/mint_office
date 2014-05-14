@@ -1,0 +1,105 @@
+fixture:
+  id: 1
+  firstname: 관리
+  lastname: 김
+  company_name:
+  position: 사장
+  department: 민트기술
+  email_list:
+  person_id: 1
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag:
+
+normal:
+  id: 2
+  firstname: 개똥
+  lastname: 김
+  company_name:
+  position: 사원
+  department: 민트기술
+  person_id: 2
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+card_bill_manager:
+  id: 3
+  firstname: 매니저
+  lastname: 카드영수증
+  company_name:
+  position: 관리자
+  department: 경리부
+  person_id: 3
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+card_used_user:
+  id: 4
+  firstname: 사용자
+  lastname: 카드
+  company_name:
+  position: 사원
+  department: 경리부
+  person_id: 4
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+retired_user:
+  id: 5
+  firstname: 직자
+  lastname: 퇴
+  company_name:
+  position: 사원
+  department: 경리부
+  person_id: 10
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+new_employee:
+  id: 6
+  firstname: 직원
+  lastname: 새로운
+  company_name: Mintech
+  position: 알바
+  department: 민트기술
+  person_id:
+  migrated_data: f
+  owner_id: 1
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+another_company_employee:
+  id: 7
+  firstname: 사장
+  lastname: 다른 회사
+  company_name: LG
+  position: 사장
+  department: 기술
+  person_id: 12
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 2
+  google_id:
+  google_etag: 

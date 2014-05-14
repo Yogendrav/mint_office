@@ -1,0 +1,67 @@
+/!- title t('.title')
+
+ul.breadcrumb
+  li
+    = link_to t('.title'), employees_path
+    span.divider= '/'
+  li
+    = @employee.fullname
+
+.page-header
+  h2
+    = "#{@employee.companyno}. #{@employee.fullname}"
+    small= " - #{@employee.position}"
+
+.row-fluid
+  .span6
+    = render "shared/attachments/detail_b", :target => @employee
+
+  .span6
+    table cellpadding="4px"
+      tr
+        th= Employee.human_attribute_name('joined_on')
+        td= @employee.joined_on
+      - if @employee.retired_on
+        tr
+          th= Employee.human_attribute_name('retired_on')
+          td= @employee.retired_on
+      tr
+        th= Employee.human_attribute_name('person_id')
+        td= @employee.person.account.name
+      tr
+        th= t('activerecord.models.occupational_group')
+        td= @employee.occupational_group ? @employee.occupational_group.name : t('common.not')
+      - if current_person.admin? || @employee == current_employee
+        tr
+          th= Employee.human_attribute_name('juminno')
+          td= @employee.juminno
+
+    - if @employee.person.contact
+      h3= t("contacts.show.title")
+      = link_to t('employees.show.find_address'), @employee.person.contact, class:"btn"
+      ul
+        = render 'contacts/item_for_employee', contact: @employee.person.contact, menu: false
+
+    h3= t('.related_documents')
+    ul
+      - @employee.documents.each do |document|
+        - if document.access?(current_person)
+          li= link_to document.title, document 
+    - if @employee.joined? && (current_person.admin? || @employee == current_employee)
+      h3= t(".related_admin_actions")
+      ul
+        li
+          = link_to t('payments.title'), payment_path(@employee)
+        li
+          = link_to t('vacations.show.link'), vacation_path(@employee)
+    .btn-group
+      - if current_person.admin? or @employee == current_employee
+        - if @employee.joined?
+          = link_to t('employees.show.pdf'), [:employment_proof, @employee], class:"btn"
+      - if current_person.admin? and !@employee.retired_on
+        - if @employee.joined?
+          = link_to t('employees.retire.title'), [:retire, @employee], class:"btn btn-inverse"
+        = link_to t('common.title.edit'), edit_employee_path(@employee), class:"btn btn-inverse"
+
+    - if current_person.admin?
+      p= render 'changelog', target: @employee

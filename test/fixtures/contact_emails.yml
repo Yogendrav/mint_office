@@ -1,0 +1,11 @@
+fixture:
+  id: 1
+  contact_id: 1
+  target: 
+  email: test@test.com
+
+new_employee:
+  id: 2
+  contact_id: 6
+  target: 
+  email: new_employee@test.com

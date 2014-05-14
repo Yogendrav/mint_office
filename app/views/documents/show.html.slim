@@ -1,0 +1,45 @@
+ul.breadcrumb
+  li
+    span= t('.title')
+    span.divider= '/'
+  li
+    span= link_to t('common.title.list'), documents_path
+    span.divider= '/'
+  li
+    span #{document.title}
+
+.container-fluid
+  .row-fluid
+    .span8
+      dl
+        dt
+          = Project.model_name.human
+        dd
+          = document.project_name
+        dt
+          = Document.human_attribute_name("tags")
+        dd
+          = document.tag_list
+        dt
+          = t(".backlink")
+        ul
+          - if document.employee
+            li= link_to "인사정보", document.employee
+          - if document.owner
+            li= link_to "세금계산서", document.owner
+
+      = render "shared/attachments/detail", :target => document
+      .clear
+      .btn-group
+        - if document.report.status == :reported
+          - unless document.employee
+            = link_to "인사정보와 연결하기", [:find_employee, document], class: 'btn btn-inverse'
+            - unless document.owner
+              = link_to "세금계산서 만들기", new_taxbill_path(document: document), class: 'btn btn-inverse'
+        - if document.access?(current_person, :write)
+          = link_to t('common.title.edit'), edit_document_path(document), :class => 'btn'
+          = link_to t('common.title.destroy'), document, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}, :class => 'btn btn-danger'
+      p
+    .span4
+      .well
+        = render 'reports/info', target: document

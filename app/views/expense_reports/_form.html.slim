@@ -1,0 +1,34 @@
+#show_command
+  = link_to t('common.title.back'), :expense_reports
+
+h2= t("common.title.#{action_name}")
+
+- target_type = expense_report.target_type || params[:target_type]
+- target_id = expense_report.target_id || params[:target_id]
+
+.box
+  #descr
+    = form_for expense_report, html: {class: "tabular"} do |f|
+      = f.error_messages
+      = f.hidden_field :target_type, value: target_type
+      = f.hidden_field :target_id, value: target_id
+      p
+        = f.label :project_id
+        = f.select :project_id, options_for_select(Project.inprogress.assign_list(current_employee).map{|project| [project.name, project.id]}, expense_report.project_id)
+      p
+        = f.label :description
+        = f.text_area :description
+      p
+        = f.label :expensed_at
+        - expense_report.expensed_at = params[:expensed_at] if params[:expensed_at]
+        = f.date_select :expensed_at, order: [:year, :month, :day]
+      p
+        = f.label :amount
+        = f.text_field :amount, value: expense_report.amount || params[:amount].to_i
+      p
+        = f.submit
+    = render 'tags/form', target: expense_report
+  #reference
+    - target = target_type.constantize.find(target_id)
+    = render "#{target_type.tableize}/detail", target: target 
+  .clear

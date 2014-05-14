@@ -1,0 +1,48 @@
+- title t('.title')
+- content_for :search do
+  = form_tag({:action => "index"}, :method => :get ) do
+    = t("common.report.status")
+    = render 'reports/search_form'
+    = t("common.title.search")
+    ' :
+    = search_field_tag 'query', params[:query]
+    = submit_tag t('common.button.search')
+    = render 'accessors/search_form'
+#show_command
+  = link_to t('documents.new.title'), new_document_path
+h2
+  = t("common.title.total")
+  ' :
+  = @documents.count
+table#list-table
+  tr
+    th
+      = Document.human_attribute_name("id")
+    th
+      = Document.human_attribute_name("title")
+    th
+      = Document.human_attribute_name("project")
+    th
+      = Document.human_attribute_name("tags")
+    th
+      = Report.human_attribute_name('status')
+    th.link_button_area
+
+  - @documents.each do |document|
+      tr.selectable.link_to*{"data-url" => document_path(document)}
+        td
+          =h document.id
+        td
+          =h document.title
+        td
+          =h document.project_name
+        td
+          =h document.tag_list
+        td
+          =h document.localize_status
+        td.link_button_area
+          = link_to t('common.button.detail_veiw'), document, class: 'btn btn-primary'
+br
+div.clear
+center
+  = will_paginate @cardbills

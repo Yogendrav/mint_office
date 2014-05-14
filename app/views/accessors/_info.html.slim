@@ -1,0 +1,27 @@
+h3
+  = t('accessors.info.permissions')
+
+ul
+  - access_target.accessors.each do |accessor|
+    li
+      = accessor.fullname
+      = "("
+      = accessor.write? ? t('accessors.info.read_write') : t('accessors.info.read')
+      = ")"
+      - unless accessor.owner.admin?
+        = link_to "[x]", accessors_path(accessor_id: accessor.id), :method => :delete
+
+- if access_target.access?(current_person, :write)
+  h3
+    = t('accessors.info.change_permissions')
+  = form_tag :accessors do
+    = hidden_field_tag :resources_type, access_target.class
+    = hidden_field_tag :resources_id, access_target.id
+    p
+      = label_tag :access_type, t('activerecord.attributes.access_person.access_type')
+      = select_tag :access_type, options_for_select([[t('accessors.info.read'), "read"], [t('accessors.info.write'), "write"]]), class: "span12"
+    p
+      = label_tag :accessor, t('activerecord.attributes.access_person.accessor')
+      = select_tag :accessor, options_for_people_and_group_select, class: "span12"
+    p
+      = submit_tag t("common.button.change"), class: "btn"

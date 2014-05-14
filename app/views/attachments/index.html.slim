@@ -1,0 +1,48 @@
+- title t(".title")
+
+#show_command
+  = link_to t('.new'), new_attachment_path
+
+h2
+  = t("common.title.list")
+table#list-table
+  tr
+    th
+      = t('attachments.index.id')
+    th
+      = t('.uploadedby')
+    th
+      = Attachment.human_attribute_name("title")
+    th
+      = Attachment.human_attribute_name("comments")
+    th
+      = Attachment.human_attribute_name("content_type")
+    th
+      = Attachment.human_attribute_name("original_filename")
+    th
+      = Attachment.human_attribute_name("filepath")
+    th.link_button_area
+
+  - @attachments.each do |attachment|
+    tr.selectable.link_to*{"data-url" => attachment_path(attachment)}
+      td
+        =h attachment.id
+      - if attachment.employee then
+        td
+          =h attachment.employee.fullname
+      - else
+        td
+      td
+        =h attachment.title
+      td
+        =h attachment.comments
+      td
+        =h attachment.contenttype
+      td
+        =h attachment.original_filename
+      td
+        =h attachment.filepath
+      td.link_button_area
+        = link_to t('common.button.detail_veiw'), attachment, class: 'btn btn-primary'
+center
+  = will_paginate @cardbills

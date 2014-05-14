@@ -1,0 +1,36 @@
+- content_for :search do
+  = form_tag({:action => "index"}, :method => :get) do
+    = select_tag :complete, options_for_select({'미지급 청구 목록' => false, '지급 완료 청구 목록' => true}, params[:complete]), "onchange" => "this.form.submit()"
+
+#show_command
+  .btn-group
+    = link_to t("common.title.new"), [:new, :payment_request]
+    - if params[:complete] == false
+      = link_to "모두 지급 완료 처리", [:complete, :payment_requests], method: :put
+
+h2 ...
+
+table#list-table
+  tr
+    th= PaymentRequest.human_attribute_name(:bank_name)
+    th= PaymentRequest.human_attribute_name(:account_number)
+    th= PaymentRequest.human_attribute_name(:account_holder)
+    th= PaymentRequest.human_attribute_name(:amount)
+    th= PaymentRequest.human_attribute_name(:request_status)
+    th.link_button_area
+  - @payment_requests.each do |payment_request|
+    tr.selectable.link_to*{"data-url" => payment_request_path(payment_request)}
+      td= payment_request.bank_name
+      td= payment_request.account_number
+      td= payment_request.account_holder
+      td= number_to_currency payment_request.amount
+      td= payment_request.request_status
+      td.link_button_area
+        = link_to t('common.button.detail_veiw'), payment_request, class: 'btn btn-primary'
+
+center
+  = will_paginate @payment_requests
+
+#export-menu
+  = t('common.export') + " : "
+  = link_to t('bank_transfers.export.excel'), export_payment_requests_path(complete: params[:complete]), method: :post

@@ -1,0 +1,58 @@
+#show_command
+  = link_to t('common.title.back'), company
+
+h2= t("common.title.#{action_name}")
+
+= form_for company, html: {class: "tabular"} do |f|
+  .box
+    p
+      = f.label :name
+      = f.text_field :name
+    p
+      = f.label :registration_number
+      = f.text_field :registration_number
+    p
+      = f.label :owner_name
+      = f.text_field :owner_name
+    p
+      = f.label :address
+      = f.text_field :address
+    p
+      = f.label :phone_number
+      = f.text_field :phone_number
+    p
+      = f.label :pay_basic_date
+      = f.select :pay_basic_date, (1..31)
+    p
+      = f.label :payday
+      = f.select :payday, (1..31)
+    p
+      = f.label :google_apps_domain
+      = f.text_field :google_apps_domain
+    p
+      = f.label :google_apps_accountname
+      = f.text_field :google_apps_accountname
+    p
+      = f.label :google_apps_password
+      = f.text_field :google_apps_password
+    p
+      = f.label :redmine_domain
+      = f.text_field :redmine_domain
+    p
+      = f.label :redmine_accountname
+      = f.text_field :redmine_accountname
+    p
+      = f.label :redmine_password
+      = f.text_field :redmine_password
+    p
+      = f.label :default_password
+      = f.text_field :default_password
+    p
+      = f.label :apply_admin_id
+      = f.select :apply_admin_id, options_from_collection_for_select(Employee.enabled.not_retired, 'id', 'fullname', company.apply_admin_id)
+    p
+      = f.label :enrollment_items
+      = f.text_field :enrollment_items
+    p
+      = render 'shared/attachments/form', form: f
+  = f.submit

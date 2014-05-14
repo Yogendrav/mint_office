@@ -1,0 +1,40 @@
+- title t('.title') + " - " + @status_me
+
+#show_command
+  = link_to t("projects.new.title"), new_project_path
+
+h2
+  = t("common.title.list")
+table#list-table
+  tr
+    th
+      = Project.human_attribute_name("name")
+    - if project.has_manager_permission?(current_employee)
+      th
+        = Project.human_attribute_name("revenue")
+    th
+      = Project.human_attribute_name("started_on")
+    th
+      = Project.human_attribute_name("ending_on")
+    - if params[:st] == "completed"
+      th
+        = Project.human_attribute_name("ended_on")
+    th.link_button_area
+  - @projects.each do |project|
+    tr.selectable.link_to*{"data-url" => project_path(project)}
+      td
+        = project.name
+      - if project.has_manager_permission?(current_employee)
+        td.money
+          = number_to_currency project.revenue
+      td
+        = project.started_on
+      td
+        = project.ending_on
+      - if params[:st] == "completed"
+        td
+          = project.ended_on
+      td.link_button_area
+        = link_to t('common.button.detail_veiw'), project, class: 'btn btn-primary'
+#show_command
+  = link_to t('.title') + ' - ' + @status_other, :controller => "projects", :action => "index", :st => @st_other

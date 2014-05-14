@@ -1,0 +1,8 @@
+tr.selectable.link_to*{"data-url" => account_path(account)}
+  td= account.name
+  td= account.google_account
+  td= account.notify_email
+  td= account.boxcar_account
+  td= account.locale
+  td.link_button_area
+  	= link_to t('common.button.detail_veiw'), account, class: 'btn btn-primary'

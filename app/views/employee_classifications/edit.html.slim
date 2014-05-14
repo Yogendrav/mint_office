@@ -1,0 +1,23 @@
+h1
+  = t('employee_classifications.edit.title')
+
+= form_for(@employee_classification) do |f|
+  = f.error_messages
+
+  p
+    = f.label :name
+    br
+    = f.text_field :name
+  p
+    = f.label :occupational_groups
+    br
+    - unless OccupationalGroup.count == 0
+      - OccupationalGroup.each do |occupational_group|
+        = check_box_tag "occupational_group_classification[occupational_group_ids][]", occupational_group.id, @occupational_group_classification.occupational_groups.include?(occupational_group)
+        = occupational_group.name
+  p
+    = f.submit 'Update'
+
+= link_to 'Show', @employee_classification
+= " "
+= link_to 'Back', employee_classifications_path

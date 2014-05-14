@@ -1,0 +1,7 @@
+div class={current_person.admin? ? "admin" : ""}
+  .menubar
+    .menubar_item.item1
+      h2= t("common.title.list")
+      ul
+        - for link in employee_classification_links
+          li= link

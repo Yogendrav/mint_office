@@ -1,0 +1,323 @@
+body {
+  font-family: Verdana, sans-serif;
+  font-size: 12px;
+  color: #484848;
+  margin: 0;
+}
+
+/* Twitter boostraped css */
+
+#list-table {
+  @extend .table;
+  @extend .table-striped;
+  tr.selectable { cursor: pointer;}
+  tr.selectable:hover {background-color: lightgrey;}
+  td.selectable {cursor: pointer;}
+}
+
+#show_command {
+  float: right;
+  a { 
+    @extend .btn;
+    @extend .btn-primary;
+  }
+  a[data-method=delete] { 
+    @extend .btn-danger;
+  }
+}
+
+
+
+/* legacy css */
+
+#header h1 a.ancestor { font-size: 80%; }
+#header {
+  padding: 12px 16px 0px 6px;
+  position: relative;
+  margin: 0px;
+}
+#quick-search {float:right;}
+
+/***** Links *****/
+
+// a, a:link, a:visited {
+//   color: #2A5685;
+//   text-decoration: none;
+// }
+
+// a:hover, a:active {
+//   color: #c61a1a;
+//   text-decoration: underline;
+// }
+
+a img {
+  border: 0;
+}
+
+form .box fieldset {
+  background: #efe;
+  margin-bottom: 20px;
+}
+
+form .box legend {
+  color: #dfd;
+  background: #141;
+  font-family: sans-serif;
+  padding: 0.2em 1em;
+}
+
+form .box label {
+  width: 10em;
+  float: left;
+  text-align: right;
+  padding-top: 0.2em;
+  margin-right: 0.1em;
+  display: block;
+}
+
+form .box select, form .box textarea, form .box input {
+  margin-left: 0.5em;
+}
+
+form .box .submit {
+  margin-left: 4em;
+}
+
+form .box div {
+  margin: 0.5em 0;
+}
+
+body {
+  background-image: url(/assets/logo_bottom.png);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
+#content {
+  margin: 10px;
+}
+
+#login-form .box {
+  width: 500px;
+  margin-top: 5em;
+  padding: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid #FDBF3B;
+  background-color: #FFEBC1;
+}
+#login-form label {
+  font-weight: bold;
+}
+
+#footer {
+  clear: both;
+  border-top: 1px solid #bbb;
+  font-size: 0.9em;
+  color: #aaa;
+  padding: 5px;
+  text-align: center;
+/*  background: #fff;*/
+}
+
+#title_area {
+  height: 5.3em;
+  margin: 0;
+
+
+/*
+
+background-color: #507AAA;*/
+  color: black;
+  padding: 4px 8px 0px 6px;
+  position: relative;
+}
+
+/*h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  line-height: 2;
+}
+
+h2 {
+  font-size: 20px;
+  padding: 2px 10px 1px 0px;
+  margin: 0 0 10px 0;
+  border-bottom: 1px solid #bbbbbb;
+  color: #444;
+}
+
+h3 {
+  font-size: 16px;
+  padding: 2px 10px 1px 0px;
+  margin: 0 0 10px 0;
+  border-bottom: 1px solid #bbbbbb;
+  color: #444;
+}
+*/
+
+div.flash {
+  padding: 4px 4px 4px 30px;
+  margin-bottom: 12px;
+  font-size: 1.1em;
+  border: 2px solid;
+}
+
+div.flash {
+  margin-top: 8px;
+}
+
+div.flash.notice {
+  background: url(../images/true.png) 8px 5px no-repeat;
+  background-color: #dfffdf;
+  border-color: #9fcf9f;
+  color: #005f00;
+}
+
+div.flash.alert {
+  background: url(../images/true.png) 8px 5px no-repeat;
+  background-color: red;
+  border-color: red;
+  color: white;
+}
+
+.box {
+  padding: 6px;
+  margin-bottom: 10px;
+  background-color: #f6f6f6;
+  color: #505050;
+  line-height: 1.5em;
+  border: 1px solid #e4e4e4;
+}
+
+#descr {
+  float: left;
+  width: 39%;
+}
+
+#attach {
+  float: right;
+  margin-left: 20px;
+}
+
+#reference {
+  float: left;
+  margin-left: 100px;
+}
+
+.currency {
+  text-align: right;
+  width: 100%;
+}
+
+.numrow
+{
+  text-align: right !important;
+}
+
+.tabular label {
+  float: left;
+  font-weight: bold;
+  margin-left: -180px;
+  text-align: right;
+  width: 175px;
+}
+
+.tabular p{
+  margin: 0;
+  padding: 5px 0 8px 0;
+  padding-left: 180px; /*width of left column containing the label elements*/
+  height: 1%;
+  clear:left;
+}
+.tabular div.fieldWithErrors {
+  padding-left: 180px;
+}
+
+.box input, select {
+  //margin-bottom: 1px;
+  margin-top: 1px;
+  vertical-align: middle;
+}
+
+table th {
+  text-align: right;
+  vertical-align: top;
+}
+
+td.money {
+  text-align: right;
+}
+
+#mainmenu-table {
+  top: 80px;
+}
+tr.related {
+  background-color: orange;
+}
+
+#mainmenu {
+  display: none;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  width: 500px;
+  top: 100px;
+  height: 200px;
+/*  background-color: #999999;*/
+}
+
+.clear {
+  clear: both;
+}
+/*
+dl { 
+  padding: 0.5em;
+}
+dt { 
+  float: left;
+  clear: left; 
+  width: 15em;
+  white-space: nowrap;
+  text-align: right; 
+  font-weight: bold; 
+  color: dimgray; 
+}
+dt:after { 
+  content: " : "; 
+}
+dd { 
+  min-height: 17px;
+  margin: 0 0 0 16em; 
+  padding: 0 0 0.5em 0; 
+}
+*/
+
+.this_week li {
+  border: none;
+}
+
+.holiday {
+  color: red;
+  font-weight: bold;
+}
+
+.vacation {
+  color: blue;
+  font-weight: bold;
+}
+
+.table-striped tr:nth-child(odd) td.today {
+	background-color: yellow;
+}
+
+.table-striped tr:nth-child(even) td.today {
+  background-color: yellow;
+}
+
+td.wday-0, td.wday-6, .table-striped tr:nth-child(odd) td.wday-0,.table-striped tr:nth-child(odd) td.wday-6, .calendar thead:first-child tr:first-child > th:first-child, .calendar thead:first-child tr:first-child > th:nth-child(7) {
+  color: red;
+  background-color: MistyRose;
+}

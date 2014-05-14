@@ -1,0 +1,14 @@
+h1
+  = t('employee_classifications.new.title')
+
+= form_for(@employee_classification) do |f|
+  = f.error_messages
+
+  p
+    = f.label :name
+    br
+    = f.text_field :name
+  p
+    = f.submit 'Create'
+
+= link_to 'Back', employee_classifications_path

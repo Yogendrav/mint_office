@@ -1,0 +1,51 @@
+#show_command
+  = link_to t('common.title.back'), :root
+
+h2= t('common.title.list')
+
+- from = @from
+- to = @to
+
+table#list-table.payment-table
+  tr
+    th= Employee.human_attribute_name("fullname")
+    - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
+    - while from < period
+    - th_class = (period.month == Time.zone.now.month ? :today : '')
+      th[class=th_class]
+        = period.month.to_s + " " + t('datetime.prompts.month')
+      - period -= 1.month
+    th.link_button_area
+    - @employees.each do |employee|
+      - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
+      tr.selectable.link_to*{"data-url" => payment_path(employee)}
+        td=h employee.fullname
+        - while from < period
+          - td_class = (period.month == Time.zone.now.month ? :today : '')
+          td.numrow[class=td_class]
+            = number_to_currency employee.payments.by_month(period.to_date).total
+          - period -= 1.month
+        td.link_button_area
+          = link_to t('common.button.detail_veiw'), payment_path(employee), class: 'btn btn-primary'
+  tr
+    td
+    - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
+    - while from < period
+      - td_class = (period.month == Time.zone.now.month ? :today : '')
+      td.numrow[class=td_class]
+        = "-----------------------"
+        br
+        = number_to_currency @payments.by_month(period.to_date).total
+      - period -= 1.month
+
+
+br
+
+center
+  = will_paginate @employees
+
+#show_command
+  - if params[:with_no_payment]
+    = link_to t('.payment_only'), payments_path(with_no_payment: false)
+  - else
+    = link_to t('.with_no_payment'), payments_path(with_no_payment: true)

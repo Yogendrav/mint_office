@@ -1,0 +1,112 @@
+<div id="show_command">
+  <%= link_to t('common.title.back'), taxbill %>
+</div>
+
+<h2><%= t("common.title.#{action_name}") %></h2>
+
+<%= form_for [taxbill, taxbill_item], html:{id: 'taxbill-form'} do |f| %>
+   <%= f.error_messages %>
+  <div class="box">
+    <p>
+      <%= f.label :unitprice %>
+      <%= f.text_field :unitprice %>
+    </p>
+    <p>
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity %>
+    </p>
+    <p>
+      <%= f.label :tax %>
+      <%= f.text_field :tax %>
+    </p>
+    <p>
+      <%= f.label :total %>
+      <%= f.text_field :total %>
+    </p>
+    <p>
+      <%= f.label :transacted_at %>
+      <%= f.date_select :transacted_at, :order => [:year, :month, :day] %>
+    </p>
+    <p>
+      <%= f.label :note %>
+      <%= f.text_area :note %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  </div>
+<% end %>
+
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function(){
+      var unitprice = $('#taxbill_item_unitprice');
+      var quantity = $('#taxbill_item_quantity');
+      var tax = $('#taxbill_item_tax');
+      var total = $('#taxbill_item_total');
+      var option = {
+        symbol: '￦',
+        roundToDecimalPlace: 0
+      };
+
+      var formatCurrency = function(){
+        $(this).formatCurrency(option);
+      };
+
+      var unformattedCurrency = function(value) {
+        result = (value+"").replace(/\D/g,'');
+        if(result == '' || result == undefined) {
+          result = 0;
+        }
+        return parseInt(result, 10);
+      }
+
+      var calculateTax = function(){
+        var unformatted = unformattedCurrency(unitprice.val());
+        return Math.round(unformatted * quantity.val() * 0.1);
+      }
+
+      var calculateTotal = function(){
+        var unformattedPrice = unformattedCurrency(unitprice.val());
+        var unformattedTax = unformattedCurrency(calculateTax());
+
+        return unformattedPrice * quantity.val() + unformattedTax;
+      }
+
+      var applyTotal = function(){
+        total.val(calculateTotal());
+        total.formatCurrency(option);
+      };
+
+      var applyTax = function(){
+        tax.val(calculateTax());
+        tax.formatCurrency(option);
+      }
+
+      var init = function() {
+        unitprice.trigger('blur');
+        tax.trigger('blur');
+        total.trigger('blur');
+      }
+
+      unitprice.blur(applyTotal);
+      unitprice.blur(applyTax);
+
+      quantity.blur(applyTotal);
+      quantity.blur(applyTax);
+
+      unitprice.blur(formatCurrency);
+      tax.blur(formatCurrency);
+      total.blur(formatCurrency);
+
+      $('#taxbill-form').submit(function(){
+        unitprice.val(unformattedCurrency(unitprice.val()));
+        tax.val(unformattedCurrency(tax.val()));
+        total.val(unformattedCurrency(total.val()));
+      });
+
+      init();
+    });
+  </script>
+<% end -%>

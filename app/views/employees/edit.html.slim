@@ -1,0 +1,35 @@
+- title t('.title')
+#show_command
+  = link_to t('common.title.show'), @employee
+  = " "
+  = link_to t('common.title.back'), employees_path
+h2
+  = t('common.title.edit')
+= form_for(@employee, :html => {:class => "tabular", :multipart => true}) do |f|
+  .box
+    = f.error_messages
+
+    - if current_person.admin?
+      p
+        = f.label :companyno, Employee.human_attribute_name('companyno')
+        = f.text_field :companyno
+      p
+        = f.label :joined_on, Employee.human_attribute_name('joined_on')
+        = f.date_select :joined_on, :order => [:year, :month, :day]
+      p
+        = f.label :listed, Employee.human_attribute_name('listed')
+        = f.check_box :listed
+      p
+        = f.label :occupational_group, t('activerecord.models.occupational_group')
+        = f.select :occupational_group_id, options_for_select([[t('common.not'), nil]] + OccupationalGroup.all.map { |og| [og.name, og.id] }, @employee.occupational_group_id)
+    p
+      = f.label :juminno, Employee.human_attribute_name('juminno')
+      = f.text_field :juminno
+    p
+      = f.label :bankbook_name
+      = f.select :bankbook_id, options_for_bankbooks_select(@employee.bankbook, collection: Bankbook.select{|bankbook| !bankbook.employee})
+
+    - if current_person.admin?
+      p
+        = render 'shared/attachments/form', form: f
+  = f.submit t("common.button.update")

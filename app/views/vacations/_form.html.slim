@@ -1,0 +1,19 @@
+#show_command
+  = link_to t('common.title.back'), vacation_path(employee)
+
+h2= t("common.title.#{action_name}")
+
+= form_for [employee, vacation], html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :from
+      = f.date_select :from, :order => [:year, :month, :day], :default => Time.zone.now
+    p
+      = f.label :to
+      = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now + 1.year - 1.day
+    p
+      = f.label :period
+      = f.text_field :period
+    p
+      = f.submit

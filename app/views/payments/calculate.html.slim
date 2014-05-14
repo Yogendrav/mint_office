@@ -1,0 +1,21 @@
+- title t("payments.yearly.title")
+
+#show_command
+  = link_to t('common.title.back'), payment_path(employee)
+
+h2= t("common.title.new")
+
+= form_tag [:yearly, employee, payment] do
+  #box
+    - payment_step do |before, after, amount|
+      - before = before.strftime("%Y.%m.%d")
+      - after = after.strftime("%Y.%m.%d")
+      - field = "#{before} ~ #{after}"
+      p
+        = label_tag "payments[#{field}]", field
+        = text_field_tag "payments[#{field}][default][title]", t('payments.calculate.payments')
+        = text_field_tag "payments[#{field}][default][amount]", amount
+        = text_field_tag "payments[#{field}][bonus][title]", t('payments.calculate.bonus')
+        = text_field_tag "payments[#{field}][bonus][amount]", 0
+    p
+      = submit_tag t("common.button.add"), :id => "submit"

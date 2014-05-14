@@ -1,0 +1,19 @@
+h1 Listing occupational_groups
+
+table
+  tr
+    th Name
+    th
+    th
+    th
+
+  - occupational_groups.each do |occupational_group|
+    tr
+      td = occupational_group.name
+      td = link_to 'Show', occupational_group
+      td = link_to 'Edit', edit_occupational_group_path(occupational_group)
+      td = link_to 'Destroy', occupational_group, confirm: 'Are you sure?', method: :delete
+
+br
+
+= link_to 'New Occupational group', new_occupational_group_path

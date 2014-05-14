@@ -1,0 +1,38 @@
+has_permission_cardbill:
+  id: 1
+  cardno: 
+  transdate: <%= Time.zone.now %>
+  amount: 10908
+  totalamount: 12000
+  storename: 버터플라이
+  approveno: 27001012
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  attachment_id:
+  creditcard_id: 1
+
+has_not_permission_cardbill:
+  id: 2
+  cardno: 
+  transdate: <%= Time.zone.now %>
+  amount: 5800
+  totalamount: 6000
+  storename: 버터플라이
+  approveno: 2
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  attachment_id:
+  creditcard_id: 1
+
+manager_has_cardbill:
+  id: 3
+  cardno:
+  transdate: <%= Time.zone.now %>
+  amount: 8908
+  totalamount: 10000
+  storename: 버터플라이
+  approveno: 4
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  attachment_id:
+  creditcard_id: 1

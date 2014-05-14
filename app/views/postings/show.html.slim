@@ -1,0 +1,18 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, posting]
+  = " "
+  = link_to t('common.title.destroy'), posting, method: :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :postings
+
+h2= t('.title')
+
+.box
+  dl
+    = dtdd posting, "posted_at"
+    = dtdd posting, "description"
+    dt
+      = t('postings.show.detail')
+    dd
+      = render "postings/sub_show", :target => posting
+    = dtdd posting, "total_amount"

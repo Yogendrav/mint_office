@@ -1,0 +1,21 @@
+- title t('.title')
+#show_command
+  = link_to t('common.title.edit'), edit_pettycash_path(@pettycash)
+  = " "
+  = link_to t('common.title.back'), pettycashes_path
+
+h2
+  = Pettycash.human_attribute_name('transdate')
+  '  :
+  = l @pettycash.transdate, format: :compact_short rescue ""
+
+.box
+  #descr
+    dl
+      = dtdd @pettycash, "inmoney"
+      = dtdd @pettycash, "outmoney"
+    p
+      b= Pettycash.human_attribute_name('description')
+    p=simple_format @pettycash.description
+  = render "shared/attachments/detail", :target => @pettycash
+= render 'changelog', target: @pettycash

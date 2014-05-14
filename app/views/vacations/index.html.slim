@@ -1,0 +1,38 @@
+- title t('.title')
+
+#show_command
+  = link_to t("vacation_types.title"), :vacation_types
+  = " "
+  = link_to t('common.title.back'), :root
+
+h2= t('common.title.list')
+table#list-table
+  tr
+    th= Account.human_attribute_name("name")
+    th= Vacation.human_attribute_name("period")
+    th= Vacation.human_attribute_name("total")
+    th= Vacation.human_attribute_name("used")
+    th= Vacation.human_attribute_name("remain")
+    th.link_button_area
+    - @employees.each do |employee|
+      tr.selectable.selectable.link_to*{"data-url" => vacation_path(employee)}
+        td=h employee.fullname
+        - vacation = employee.vacations.last
+        - if vacation
+          td= "#{vacation.from} ~ #{vacation.to}"
+          td= "#{vacation.period}"+" "+t('vacations.index.day')
+          td= "#{vacation.used.total}"+" "+t('vacations.index.day')
+          td= "#{vacation.remain}"+" "+t('vacations.index.day')
+          td.link_button_area
+            = link_to t('common.button.detail_veiw'), vacation, class: 'btn btn-primary'
+        - else
+          td
+          td
+          td
+          td
+          td
+
+br
+
+center
+  = will_paginate @employees

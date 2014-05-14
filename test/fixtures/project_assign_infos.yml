@@ -1,0 +1,80 @@
+admin_regist_project:
+  id: 1
+  participant_type: "Employee"
+  participant_id: 1
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
+
+cardbill_manager_registe_project:
+  id: 2
+  participant_type: "Employee"
+  participant_id: 3
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t
+
+card_used_user_registe_project:
+  id: 3
+  participant_type: "Employee"
+  participant_id: 4
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
+
+normal_user_registe_project:
+  id: 4
+  participant_type: "Employee"
+  participant_id: 2
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
+
+admin_regist_end_project:
+  id: 5
+  participant_type: "Employee"
+  participant_id: 1
+  project_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
+
+cardbill_manager_registe_end_project:
+  id: 6
+  participant_type: "Employee"
+  participant_id: 3
+  project_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t
+
+card_used_user_registe_end_project:
+  id: 7
+  participant_type: "Employee"
+  participant_id: 4
+  project_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
+
+normal_user_registe_end_project:
+  id: 8
+  participant_type: "Employee"
+  participant_id: 2
+  project_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
+
+another_company_admin_registe_project:
+  id: 9
+  participant_type: "Employee"
+  participant_id: 6
+  project_id: 4
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t

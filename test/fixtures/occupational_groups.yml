@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+regular:
+  id: 1
+  name: 정규직
+
+intern:
+  id: 2
+  name: 인턴
+
+freelancer:
+  id :3
+  name: 프리랜서
+
+parttime:
+  name: 비상근 임직원

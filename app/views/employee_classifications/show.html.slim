@@ -1,0 +1,28 @@
+p#notice = notice
+
+p
+  b
+    = t('employee_classifications.show.name')
+    ' :
+  =h @employee_classification.name
+hr
+h2= t('employee_classifications.show.account')
+
+ul
+  - if !@employee_classification.occupational_groups.blank?
+    - @employee_classification.occupational_groups.each do |occupational_group|
+      li
+        = "[직군] " + occupational_group.name + " "
+        = link_to "[X]", :action => 'remove_employee', :id => @employee_classification, participant_type: :occupational_group, :participant_id => occupational_group
+
+h3= t('employee_classifications.show.add')
+= form_tag(:action => "add_employee") do
+  = hidden_field_tag :id, @employee_classification.id
+  p
+    = label_tag :participant
+    = select_tag :participant, options_for_occupational_group_select
+
+  = submit_tag "추가"
+
+hr
+= link_to 'Back', employee_classifications_path

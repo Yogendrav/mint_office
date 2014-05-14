@@ -1,0 +1,47 @@
+#show_command
+  - if expense_report.report.status == :reported
+    - if expense_report.posting
+      = link_to t("postings.show.link"), expense_report.posting
+    - else
+      - if current_person.permission? :postings
+        = link_to t("postings.new.link"), new_posting_path(report: expense_report)
+    = " "
+  = link_to t("activerecord.models.#{expense_report.target_type.tableize.singularize}") + " " + t('expense_reports.show.view'), expense_report.target
+  = " "
+  - unless expense_report.posting
+    = link_to t('common.link.edit'), [:edit, expense_report]
+    = " "
+    = link_to t('common.link.destroy'), expense_report, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+    = " "
+  = link_to t('common.title.back'), :expense_reports
+
+h2
+  = t('expense_reports.show.detail_expense')
+
+.box
+  #descr
+    dl
+      dt
+        = expense_report.class.human_attribute_name(:owner)
+      dd = expense_report.employee.fullname
+      dt
+        = expense_report.class.human_attribute_name(:target)
+      dd
+        = t("activerecord.models.#{expense_report.target_type.tableize.singularize}")
+      dt
+        = expense_report.class.human_attribute_name(:project)
+      dd
+        = expense_report.project.name rescue ""
+      = dtdd expense_report, "description"
+      = dtdd expense_report, "expensed_at"
+      = dtdd expense_report, "amount"
+      dt
+        = ExpenseReport.human_attribute_name("tags")
+      dd
+        = expense_report.tag_list
+  - if expense_report.target.respond_to?(:attachments)
+    = render "shared/attachments/detail", :target => expense_report.target
+  .clear
+br
+= render "#{expense_report.target_type.tableize}/detail", target: expense_report.target
+= render 'reports/info', target: expense_report

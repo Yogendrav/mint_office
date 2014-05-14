@@ -1,0 +1,25 @@
+- title t('.title')
+#show_command
+  = link_to t('common.title.show'), document_path(document)
+  = " "
+  = link_to t('common.title.list'),  documents_path
+
+h2
+  = t 'common.title.edit'
+= form_for(document, :url => { :action => "update" }, :html => { :class=>"tabular", :multipart => true }) do |f|
+  .box
+    = f.error_messages
+
+    p
+      = f.label :title, Document.human_attribute_name('title')
+      = f.text_field :title
+    p
+      = f.label :project, Project.model_name.human
+      = f.collection_select(:project_id, project_list, :id, :name)
+    p
+      = render 'shared/attachments/form', form: f
+
+  = f.submit t('common.button.update')
+  .clear
+
+= render 'tags/form', target: document

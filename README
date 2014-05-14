@@ -1,0 +1,57 @@
+# Welcome to Mint Office
+
+# Introduction
+
+## Prerequisites
+
+RVM may be useful since ruby 1.9.2 is required.
+
+Before using brew on OS X, make sure /usr/local is owned by you, not a strange code, in which installing "deployd" or "node" results. Otherwise "brew link" command is broken every time.
+
+> 
+brew install mysql
+
+Refer to http://madebyhoundstooth.com/blog/install-mysql-on-mountain-lion-with-homebrew/ for details.
+
+> 
+brew install imagemagick
+
+Consult to http://stackoverflow.com/questions/13942443/error-installing-rmagick-on-mountain-lion in case you face a problem there.
+
+## Setup
+
+### Source code repository
+
+> git clone git@g.mintech.kr:mintoffice.git
+>
+> cd mintoffice
+>
+> git checkout develop
+
+### Installation
+
+> 
+bundle install
+
+Sometimes installing a gem with native extensions causes difficult situations to resolve. In such a case, you need to look at files at the directory. For RVM,  ~/.rvm/gems/ruby-xxx/gems is the home.
+
+### Configuration
+
+Create your own config/database.yml (cf. http://guides.rubyonrails.org/getting_started.html). Of course, you should create a database (ex. mintoffice_development) on your DBMS.
+
+Create your own oauth_key.yml (copying oauth_key.yml.example would do)
+
+### Population
+
+> rake db:migrate
+>
+> rake db:seed
+
+## Test
+
+Once setup is completed, 
+
+> 
+rails server
+
+and open http://0.0.0.0:3000 .

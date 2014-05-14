@@ -1,0 +1,43 @@
+fixture:
+  company_id: 1
+  person_id: 1
+
+normal:
+  company_id: 1
+  person_id: 2
+
+card_manager:
+  company_id: 1
+  person_id: 3
+
+card_user:
+  company_id: 1
+  person_id: 4
+
+no_employee:
+  company_id: 1
+  person_id: 5
+
+has_google_apps_account:
+  company_id: 1
+  person_id: 6
+
+google_account_user:
+  company_id: 1
+  person_id: 7
+
+daum_account_user:
+  company_id: 1
+  person_id: 8
+
+nate_account_user:
+  company_id: 1
+  person_id: 9
+
+retired_user:
+  company_id: 1
+  person_id: 10
+
+another_company_user:
+  company_id: 2
+  person_id: 12

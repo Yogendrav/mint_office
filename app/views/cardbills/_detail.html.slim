@@ -1,0 +1,12 @@
+#show_command
+  - if current_person.permission? :card_histories
+    = link_to "사용내역 보기", target.card_history
+    = " "
+h3
+  = t('cardbills.detail.title')
+
+dl
+  = dtdd target, "amount"
+  = dtdd target, "totalamount"
+  = dtdd target, "storename"
+  = dtdd target, "approveno"

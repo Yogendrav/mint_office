@@ -1,0 +1,35 @@
+fixture:
+  id: 1
+
+normal:
+  id: 2
+
+card_manager_account:
+  id: 3
+
+card_user_account:
+  id: 4
+
+no_employee:
+  id: 5
+
+has_google_apps_account:
+  id: 6
+
+google_account_user:
+  id: 7
+
+daum_account_user:
+  id: 8
+
+nate_account_user:
+  id: 9
+
+retired_user:
+  id: 10
+
+enrollment_user:
+  id: 11
+
+another_company_admin:
+  id: 12

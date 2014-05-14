@@ -1,0 +1,27 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, ledger_account]
+  = " "
+  = link_to t('common.title.destroy'), ledger_account, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :ledger_accounts
+
+h2= t('.title')
+
+.box
+  #descr
+    = dtdd ledger_account, "title"
+    = dtdd ledger_account, "category"
+
+  #references
+    table cellspacing="5" cellpadding="5"
+      tr
+        th 
+          = t('ledger_accounts.show.period')
+        th
+          = t('ledger_accounts.show.price')
+      - ledger_account.items.find_each do |item|
+        tr
+          td= item.posting.posted_at.strftime("%Y.%m.%d") rescue ""
+          td= number_to_currency item.amount
+
+  .clear

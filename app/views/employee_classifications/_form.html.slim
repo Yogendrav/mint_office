@@ -1,0 +1,12 @@
+= form_for @employee_classification do |f|
+  - if @employee_classification.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@employee_classification.errors.count, "error")} prohibited this employee_classification from being saved:"
+      ul
+        - @employee_classification.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .actions = f.submit 'Save'

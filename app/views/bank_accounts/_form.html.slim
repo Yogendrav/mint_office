@@ -1,0 +1,20 @@
+#show_command
+  = link_to t('common.title.back'), :bank_accounts
+
+h2= t("common.title.#{action_name}")
+
+= form_for bank_account, html: {multipart: true} do |f|
+  .box
+    p
+      = f.label :name
+      = f.select :name, options_for_select(BankAccount::BANK_LIST, bank_account.name_)
+    p
+      = f.label :number
+      = f.text_field :number
+    p
+      = f.label :note
+      = f.text_area :note
+    p
+      = render 'shared/attachments/form', form: f
+    p
+      = f.submit
